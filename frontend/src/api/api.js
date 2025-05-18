@@ -30,6 +30,7 @@ api.interceptors.response.use(
       } catch (err) {
         console.log('Token refresh failed');
         clearTokens();
+        window.location.href = '/'; // Redirect to login page
       }
     }
     return Promise.reject(error);
