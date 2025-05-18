@@ -6,7 +6,7 @@ function Dashboard({ onLogout }) {
   return (
     <Container fluid className="mt-3">
       {/* Main Content */}
-      <div style={{ marginLeft: showSidebar ? 390 : 80, transition: 'margin-left 0.3s' }}>
+      <div>
         <h3 className="mt-3">Database Dashboard</h3>
         <div className="mx-3">
           <RecordList />
