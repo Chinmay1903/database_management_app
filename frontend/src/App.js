@@ -1,17 +1,29 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
+import SQLQuery from './components/SQLQuery';
+import { clearTokens } from './utils/auth';  // Import the function to clear tokens
+import AppNavbar from './components/AppNavbar';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('access'));
 
+  const handleLogout = () => {
+    clearTokens();  // Remove tokens from localStorage
+    setIsAuthenticated(false);  // Update state
+  };
+
   return (
     <Router>
+        <AppNavbar isAuthenticated={isAuthenticated} onLogout={handleLogout} /> 
       <Routes>
         {isAuthenticated ? (
-          <Route path="/" element={<Dashboard />} />
+          <>
+            <Route path="/" element={<Dashboard onLogout={handleLogout} />} />
+            <Route path="/sqlquery" element={<SQLQuery />} />
+          </>
         ) : (
           <>
             <Route path="/" element={<Login onLogin={() => setIsAuthenticated(true)} />} />

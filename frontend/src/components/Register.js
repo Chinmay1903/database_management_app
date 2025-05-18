@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Form, Button, Alert, Container, Row, Col } from 'react-bootstrap';
 import axios from '../api/api';
+import { Link } from 'react-router-dom';
 
-function Register({ onRegister }) {
+function Register() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -11,13 +12,18 @@ function Register({ onRegister }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/register/', { username, email, password });
+      const response = await axios.post('/register/', {
+        username,
+        email,
+        password,
+      });
       setMessage('Registration successful! You can log in now.');
       setUsername('');
       setEmail('');
       setPassword('');
     } catch (err) {
-      setMessage('Registration failed. Try again.');
+      setMessage('Registration failed. Please try again.');
+      console.error(err.response?.data || 'Error');
     }
   };
 
@@ -59,6 +65,9 @@ function Register({ onRegister }) {
               Register
             </Button>
           </Form>
+          <div className="mt-3">
+            Already have an account? <Link to="/">Login here</Link>
+          </div>
         </Col>
       </Row>
     </Container>

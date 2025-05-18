@@ -1,22 +1,22 @@
-import React from 'react';
-import { Container, Navbar, Nav } from 'react-bootstrap';
+import { useState } from 'react';
+import { Container, Navbar, Nav, Button, Offcanvas } from 'react-bootstrap';
 import RecordList from './RecordList';
-import RecordForm from './RecordForm';
 
-function Dashboard() {
+function Dashboard({ onLogout }) {
+  const [showSidebar, setShowSidebar] = useState(false);
+
+  const handleClose = () => setShowSidebar(false);
+  const handleShow = () => setShowSidebar(true);
+
   return (
-    <Container className="mt-3">
-      <Navbar bg="dark" variant="dark">
-        <Container>
-          <Navbar.Brand>pgAdminLite</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="/">Dashboard</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
-      <h3 className="mt-3">Database Dashboard</h3>
-      <RecordForm />
-      <RecordList />
+    <Container fluid className="mt-3">
+      {/* Main Content */}
+      <div style={{ marginLeft: showSidebar ? 390 : 80, transition: 'margin-left 0.3s' }}>
+        <h3 className="mt-3">Database Dashboard</h3>
+        <div className="mx-3">
+          <RecordList />
+        </div>
+      </div>
     </Container>
   );
 }

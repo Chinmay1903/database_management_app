@@ -1,38 +1,45 @@
-.App {
-  text-align: center;
+/* Modern Sticky Top Navbar Styles */
+.navbar {
+  background-color: #007bff;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.navbar .navbar-brand {
+  font-weight: bold;
+  font-size: 1.5rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.navbar .nav-link {
+  font-size: 1.1rem;
+  color: #dcdcdc;
+  margin-right: 10px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.navbar .nav-link:hover {
+  color: #ffffff;
+}
+
+.navbar .nav-item.active-link {
+  background-color: #0056b3;
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: #ffffff !important;
+}
+
+.navbar .nav-item.active-link:hover {
+  background-color: #00408a;
+}
+
+.navbar .btn-outline-light {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.navbar .btn-outline-light:hover {
+  background-color: #0056b3;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Sticky Navbar Shadow Effect */
+.navbar.sticky-top {
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getAccessToken, getRefreshToken, saveTokens } from '../utils/auth';
+import { getAccessToken, getRefreshToken, saveTokens, clearTokens } from '../utils/auth';
 
 const api = axios.create({
   baseURL: 'http://localhost:8000/api/',
@@ -29,6 +29,7 @@ api.interceptors.response.use(
         return api(originalRequest);
       } catch (err) {
         console.log('Token refresh failed');
+        clearTokens();
       }
     }
     return Promise.reject(error);
