@@ -56,7 +56,7 @@ database_management_app is a simplified database management tool that provides a
 ### **Step 1: Clone the Repository**
 ```bash
 git clone https://github.com/yourusername/pgadminlite.git
-cd pgadminlite
+cd database_management_app
 ```
 
 ### **🐋 Step 2: Run Docker Compose**
