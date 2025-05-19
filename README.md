@@ -55,7 +55,7 @@ database_management_app is a simplified database management tool that provides a
 
 ### **Step 1: Clone the Repository**
 ```bash
-git clone https://github.com/yourusername/pgadminlite.git
+git clone git@github.com:Chinmay1903/database_management_app.git
 cd database_management_app
 ```
 
