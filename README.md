@@ -61,14 +61,14 @@ cd pgadminlite
 
 ### **🐋 Step 2: Run Docker Compose**
 ```bash
-docker-compose up --build
+docker-compose up --build -d
 ```
 
 ### **🔄 Step 3: Database Migrations**
 #### **Run Migrations:**
 ```bash
-docker-compose exec web python manage.py makemigrations api
-docker-compose exec web python manage.py migrate
+docker-compose exec backend python manage.py makemigrations api
+docker-compose exec backend python manage.py migrate
 ```
 
 #### **Create a Superuser:**
