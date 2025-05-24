@@ -29,6 +29,13 @@ function AppNavbar({ isAuthenticated, onLogout }) {
                 </Nav.Link>
                 <Nav.Link
                   as={Link}
+                  to="/createtable"
+                  className={`nav-item ${isActive('/createtable') ? 'active-link' : ''}`}
+                >
+                  Create Table
+                </Nav.Link>
+                <Nav.Link
+                  as={Link}
                   to="/sqlquery"
                   className={`nav-item ${isActive('/sqlquery') ? 'active-link' : ''}`}
                 >

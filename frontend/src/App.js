@@ -6,6 +6,7 @@ import Dashboard from './components/Dashboard';
 import SQLQuery from './components/SQLQuery';
 import { clearTokens } from './utils/auth';  // Import the function to clear tokens
 import AppNavbar from './components/AppNavbar';
+import CreateTable from './components/CreateTable';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('access'));
@@ -21,7 +22,8 @@ function App() {
       <Routes>
         {isAuthenticated ? (
           <>
-            <Route path="/" element={<Dashboard onLogout={handleLogout} />} />
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/createtable" element={<CreateTable />} />
             <Route path="/sqlquery" element={<SQLQuery />} />
           </>
         ) : (

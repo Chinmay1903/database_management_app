@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Form, Button, Alert, Container, Row, Col, Table } from 'react-bootstrap';
 import axios from '../api/api';
+import Sidebar from './Sidebar';
 
 function SQLQuery() {
   const [query, setQuery] = useState('');
@@ -12,17 +13,27 @@ function SQLQuery() {
     setError('');
     setResult(null);
     try {
-        const response = await axios.post('/execute/', { query });
-        setResult(response.data);
+      const response = await axios.post('/execute/', { query });
+      setResult(response.data);
     } catch (err) {
-        setError(err.response.data.message || 'An error occurred while executing the query.');
+      setError(err.response.data.message || 'An error occurred while executing the query.');
     }
   };
 
+  const handleTableSelect = (table) => {
+    setQuery(query + table);
+    console.log(query);
+    
+  };
+
+
   return (
-    <Container className="mt-4">
-      <Row className="justify-content-md-center">
-        <Col md={8}>
+    <Container fluid className="mt-4">
+      <Row>
+        <Col md={3} className="p-0">
+          <Sidebar onSelectTable={handleTableSelect} />
+        </Col>
+        <Col md={9}>
           <h3>SQL Query Executor</h3>
           <Form onSubmit={handleExecute}>
             <Form.Group>
@@ -41,7 +52,7 @@ function SQLQuery() {
           </Form>
 
           {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
-          
+
           {result && result.data && (
             <div className="mt-4">
               <h5>Query Result:</h5>
