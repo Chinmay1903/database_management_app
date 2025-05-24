@@ -63,9 +63,11 @@ const DynamicForm = ({ show, onClose, tableName, mode = 'add', rowId = null, row
                                 <Form.Control
                                     type="text"
                                     name={col}
+                                    disabled={col === 'id' || col.toLowerCase() === 'created_at' || col.toLowerCase() === 'updated_at'}
+                                    placeholder={col.toLowerCase() === 'id' || col.toLowerCase() === 'created_at' || col.toLowerCase() === 'updated_at' ? `${col} will be auto-generated` : `Enter ${col}`}
                                     value={formData[col] || ''}
                                     onChange={handleChange}
-                                    disabled={col === 'id' && mode === 'edit'}
+                                    required={col !== 'id' && col !== 'created_at' && col !== 'updated_at'}
                                 />
                             </Form.Group>
                         ))}
