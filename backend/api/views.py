@@ -29,6 +29,15 @@ class TableDataView(APIView):
     def post(self, request, table_name):
         try:
             payload = request.data  # should be a dict of column-value pairs
+
+            # Remove 'id' if empty or null to allow auto-increment
+            if 'id' in payload and not payload['id']:
+                del payload['id']
+
+            # Remove 'created_at' if empty to allow default timestamp
+            if 'created_at' in payload and not payload['created_at']:
+                del payload['created_at']
+
             columns = ', '.join(payload.keys())
             values = ', '.join([f"'{v}'" for v in payload.values()])
             query = f"INSERT INTO {table_name} ({columns}) VALUES ({values})"
@@ -97,9 +106,18 @@ class CreateTableView(APIView):
             columns = request.data.get("columns")  # Expecting a list of dictionaries
             if not table_name or not columns:
                 return Response({"error": "Table name and columns are required."}, status=status.HTTP_400_BAD_REQUEST)
+            
+            # Add auto columns
+            auto_columns = [
+                {"name": "id", "type": "SERIAL PRIMARY KEY"},
+                {"name": "created_date", "type": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"}
+            ]
+
+            # Combine columns (auto + user-defined)
+            full_column_list = auto_columns + columns
 
             # Construct the SQL query to create a table
-            column_definitions = ", ".join([f"{col['name']} {col['type']}" for col in columns])
+            column_definitions = ", ".join([f"{col['name']} {col['type']}" for col in full_column_list])
             query = f"CREATE TABLE {table_name} ({column_definitions});"
 
             # Execute the query
