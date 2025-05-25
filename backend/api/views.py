@@ -110,7 +110,7 @@ class CreateTableView(APIView):
             # Add auto columns
             auto_columns = [
                 {"name": "id", "type": "SERIAL PRIMARY KEY"},
-                {"name": "created_date", "type": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"}
+                {"name": "created_at", "type": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"}
             ]
 
             # Combine columns (auto + user-defined)
